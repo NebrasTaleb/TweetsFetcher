@@ -1,9 +1,11 @@
 package com.example.nebrasvm.tttapp
 
 import kotlinx.coroutines.Deferred
+import okhttp3.Call
 import okhttp3.Interceptor
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val TWITTER_ACCESS_TOKEN = "4002126376-HJrTsavjL0tCG6BBWQlLNbIsGAOTjRLRIOqea4v"
@@ -13,8 +15,8 @@ const val TWITTER_CONSUMER_KEY_SECRET = "WG9ViWyk2Q4SFqxsSkRv0PZcr0HcY7WzQeRCDSf
 const val RESOURCE_URL = "https://api.twitter.com/1.1/search/tweets.json"
 
 interface ApiService {
-    @GET(value = "tweets.json")
-    fun getTweets(@Query(value = "q") keyWord: String , @Header("authorization") authHeader: String): Deferred<TweetObject>
+        @GET(value = "/tweets.json?q={q}")
+    fun getTweets(@Path(value = "q") keyWord: String, @Header("authorization") authHeader: String): retrofit2.Call<TweetObject>
 
 //    companion object {
 //        operator fun invoke(): ApiService{
