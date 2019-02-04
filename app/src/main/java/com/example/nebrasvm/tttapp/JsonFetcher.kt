@@ -1,13 +1,8 @@
 package com.example.nebrasvm.tttapp
 
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.widget.Toast
 import com.google.gson.GsonBuilder
-import okhttp3.*
-import java.io.IOException
-import java.security.AccessController.getContext
-import kotlin.contracts.contract
 
 class JsonFetcher constructor(baseUrl: String, appContext: Context) {
 
@@ -82,9 +77,9 @@ class JsonFetcher constructor(baseUrl: String, appContext: Context) {
 
     }
 
-    fun mapTweetToListItem(tweetObject: TweetObject): List<ListItem> {
+    fun mapTweetToListItem(tweetObject: TweetObject?): List<ListItem> {
         var listOfTweets: MutableList<ListItem> = mutableListOf()
-        for (tweet: SingleTweet in tweetObject.statuses) {
+        for (tweet: TweetObject.SingleTweet in tweetObject!!.statuses) {
             var newItem = ListItem(tweet.text , R.drawable.countryside)
             listOfTweets.add(newItem)
         }
